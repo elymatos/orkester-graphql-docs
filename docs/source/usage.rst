@@ -15,59 +15,61 @@ Query
 1.Basic
 
 .. code-block:: console
-query {
+
+  query {
     frames {
-        idFrame
-        name
+      idFrame
+      name
     }
-}
+  }
 
 
 2.Alias
 
 .. code-block:: console
-query {
+
+  query {
     LexicalUnit:lus {
         luName: name
     }    
-}
+  }
 
 
 3.Flattened association 
 
 .. code-block:: console
 
-query {
+  query {
     frames {
         name
         lu(field: "lus.name")
     }
-}
+  }
 
 
 4.Nested association
 
 .. code-block:: console
 
-query {
+  query {
     frames {
         name
         fes {
             name
         }
     }
-}
+  }
 
 
 5.Expression
 
 .. code-block:: console
 
-query {
+  query {
     frames {
         fe (expr: "concat(name, ' - ', fes.name)")
     }
-}
+  }
 
 
 Operators
@@ -77,30 +79,31 @@ Operators
 
 .. code-block:: console
 
-query {
+  query {
     frames (id: 1) {
          idFrame
          name
     }
-}
+  }
 
 
 2.Limit & Offset
 
 .. code-block:: console				
-query {
+
+  query {
     frames(limit: 10, offset: 200) {
         idFrame
         name
     }
-}
+  }
 
 
 3.Order By
 
 .. code-block:: console
 
-query {
+  query {
     lus (order_by: [
             {asc: "frame.name"}
             {desc: "name"}
@@ -110,21 +113,21 @@ query {
         frame (field: "frame.name")
         name
     }
-}
+  }
 
 
 4.Group
 
 .. code-block:: console
 
-query {
+  query {
     lus(
         group_by: ["idLanguage"]
     ){
         idLanguage
       	cnt(expr: "count(idLU)")
     }
-}
+  }
 
 
 5. Forced Join
@@ -134,7 +137,7 @@ query {
 
 .. code-block:: console
 
-query {
+  query {
     frames(
         join: [{LEFT: "lus"}]
         where: {
@@ -145,7 +148,7 @@ query {
     ) {
         name
     }
-}
+  }
 
 
 Conditions
@@ -172,7 +175,7 @@ Conditions
 
 .. code-block:: console
 
-query {
+  query {
     lus (
         where: {
             name: {like: "%action%"}, 
@@ -182,7 +185,7 @@ query {
         name
         idLanguage
     }
-}
+  }
 
 
 Insert
@@ -192,7 +195,7 @@ Insert
 
 .. code-block:: console
 
-mutation {
+  mutation {
     insert_colors (
         object: {
             name: "sample1",
@@ -203,13 +206,13 @@ mutation {
         idColor
         name
     }
-}
+  }
 
 ### Multiple
 
 .. code-block:: console
 
-mutation {
+  mutation {
     insert_colors (
         objects: [{
             name: "sample1",
@@ -228,7 +231,7 @@ mutation {
         idColor
         name
     }
-}
+  }
 
 
 Update
@@ -238,7 +241,7 @@ Update
 
 .. code-block:: console
 
-mutation {
+  mutation {
     update_colors (
          id: 116,
          set: {
@@ -250,14 +253,14 @@ mutation {
         idColor
         name
     }
-}
+  }
 
 
 ### Multiple
 
 .. code-block:: console
 
-mutation {
+  mutation {
     update_colors(
         where: {name: {like: "sample%"}}
         set: {name: "testcolor"}
@@ -265,7 +268,7 @@ mutation {
         idColor
         name
     }
-}
+  }
 
 
 Delete
@@ -277,12 +280,12 @@ delete mutations only accept \"id\" operator
 
 .. code-block:: console
 
-mutation {
+  mutation {
     delete_colors(
       id:119
     )
-}
-```
+  }
+
 
 Services
 --------
@@ -291,11 +294,11 @@ name: service_folder_class_method([parameters])
 
 .. code-block:: console
 
-mutation {
+  mutation {
     service_AuthUser_registerLogin(userInfo: $userInfo) {
         result
     }
-}
+  }
 
 
 Advanced
@@ -305,7 +308,7 @@ Advanced
 
 .. code-block:: console
 
-query {
+  query {
     colors(
         __condition:[
             {name: {startswith: "blue"}}
@@ -320,22 +323,22 @@ query {
     ) {
         name
     }
-}
+  }
 
 
 ### Fragment
 
 .. code-block:: console
 
-fragment FrameInfo on Frames {
+  fragment FrameInfo on Frames {
         name
-}
+  }
 
-query {
+  query {
     frames {
         ...FrameInfo
    }
-}
+  }
 
 
 Examples
@@ -344,7 +347,7 @@ Examples
 
 .. code-block:: console
 
-query listDocuments($corpus: String, $document: String, $ids: Array, $idLanguage: Int) {
+  query listDocuments($corpus: String, $document: String, $ids: Array, $idLanguage: Int) {
   documents (
       order_by: [
          {asc: "corpusName"}
@@ -365,12 +368,12 @@ query listDocuments($corpus: String, $document: String, $ids: Array, $idLanguage
       idCorpus
       corpusName(field:"corpus.name")
    }
-}
+  }
 
 
 .. code-block:: console
 
-query total {
+  query total {
   imagemm (
     database: "charon"
     offset: 0
@@ -379,11 +382,11 @@ query total {
     idImageMM
   }
  __total (query: "imagemm")
-}
+  }
 
 .. code-block:: console
 
-query listAll ($offset:Int $limit:Int) {
+  query listAll ($offset:Int $limit:Int) {
   objectmm (
     database: "charon"
     order_by: [
@@ -407,7 +410,7 @@ query listAll ($offset:Int $limit:Int) {
     idLemma
     idLU
   }
-}
+  }
 
 
 
