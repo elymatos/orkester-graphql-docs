@@ -15,7 +15,6 @@ Query
 1.Basic
 
 .. code-block:: console
-
 query {
     frames {
         idFrame
@@ -27,7 +26,6 @@ query {
 2.Alias
 
 .. code-block:: console
-
 query {
     LexicalUnit:lus {
         luName: name
