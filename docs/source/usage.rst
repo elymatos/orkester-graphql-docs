@@ -10,9 +10,11 @@ Config
 Query
 -----
 
-### Selection
+Selection
+^^^^^^^^^
 
-1.Basic
+Basic
+"""""
 
 .. code-block:: console
 
@@ -23,8 +25,8 @@ Query
     }
   }
 
-
-2.Alias
+Alias
+"""""
 
 .. code-block:: console
 
@@ -35,7 +37,8 @@ Query
   }
 
 
-3.Flattened association 
+Flattened association 
+"""""""""""""""""""""
 
 .. code-block:: console
 
@@ -47,7 +50,8 @@ Query
   }
 
 
-4.Nested association
+Nested association
+""""""""""""""""""
 
 .. code-block:: console
 
@@ -61,7 +65,8 @@ Query
   }
 
 
-5.Expression
+Expression
+""""""""""
 
 .. code-block:: console
 
@@ -75,7 +80,8 @@ Query
 Operators
 ---------
 
-1.Id
+Id
+^^
 
 .. code-block:: console
 
@@ -87,7 +93,8 @@ Operators
   }
 
 
-2.Limit & Offset
+Limit & Offset
+^^^^^^^^^^^^^^
 
 .. code-block:: console				
 
@@ -99,7 +106,8 @@ Operators
   }
 
 
-3.Order By
+Order By
+^^^^^^^^
 
 .. code-block:: console
 
@@ -116,7 +124,8 @@ Operators
   }
 
 
-4.Group
+Group
+^^^^^
 
 .. code-block:: console
 
@@ -130,10 +139,11 @@ Operators
   }
 
 
-5. Forced Join
+Forced Join
+^^^^^^^^^^^
 
-   - LEFT, RIGHT, INNER (in uppercase)
-
+LEFT, RIGHT, INNER (in uppercase)
+"""""""""""""""""""""""""""""""""
 
 .. code-block:: console
 
@@ -154,7 +164,9 @@ Operators
 Conditions
 ----------
 
-#### Generic operators
+Generic operators
+^^^^^^^^^^^^^^^^^
+
 - eq : =
 - neq : <>
 - gt : >
@@ -166,12 +178,13 @@ Conditions
 - {is_null: true} : IS NULL
 - {is_null: false} : IS NOT NULL 
  
-#### Textual operators
+Textual operators
+^^^^^^^^^^^^^^^^^
+
 - like : LIKE
 - nlike : NOT LIKE
 - starts_with : string starts with 
 - regex : RLIKE
-
 
 .. code-block:: console
 
@@ -191,7 +204,8 @@ Conditions
 Insert
 ------
 
-### Single
+Single
+^^^^^^
 
 .. code-block:: console
 
@@ -208,7 +222,8 @@ Insert
     }
   }
 
-### Multiple
+Multiple
+^^^^^^^^ 
 
 .. code-block:: console
 
@@ -237,7 +252,8 @@ Insert
 Update
 ------
 
-### Object
+Object
+^^^^^^
 
 .. code-block:: console
 
@@ -256,7 +272,8 @@ Update
   }
 
 
-### Multiple
+Multiple
+^^^^^^^^ 
 
 .. code-block:: console
 
@@ -274,7 +291,8 @@ Update
 Delete
 ------
 
-### Object
+Object
+^^^^^^
 
 delete mutations only accept \"id\" operator
 
@@ -290,7 +308,7 @@ delete mutations only accept \"id\" operator
 Services
 --------
 
-name: service_folder_class_method([parameters])
+name: service_method([parameters])
 
 .. code-block:: console
 
@@ -304,7 +322,8 @@ name: service_folder_class_method([parameters])
 Advanced
 --------
 
-### Subquery - Query
+Subquery - Query
+^^^^^^^^^^^^^^^^ 
 
 .. code-block:: console
 
@@ -326,7 +345,8 @@ Advanced
   }
 
 
-### Fragment
+Fragment
+^^^^^^^^ 
 
 .. code-block:: console
 
@@ -344,11 +364,10 @@ Advanced
 Examples
 --------
 
-
 .. code-block:: console
 
   query listDocuments($corpus: String, $document: String, $ids: Array, $idLanguage: Int) {
-  documents (
+    documents (
       order_by: [
          {asc: "corpusName"}
          {asc: "name"}
@@ -362,56 +381,53 @@ Examples
             {field:"corpus.idLanguage" starts_with:$idLanguage}
          ]
       }
-  ){
+    ){
       idDocument
       name
       idCorpus
       corpusName(field:"corpus.name")
-   }
+    }
   }
 
 
 .. code-block:: console
 
   query total {
-  imagemm (
-    database: "charon"
-    offset: 0
-    limit: 0
-  ){
-    idImageMM
-  }
- __total (query: "imagemm")
+    imagemm (
+      database: "charon"
+      offset: 0
+      limit: 0
+    ){
+      idImageMM
+    }
+    __total (query: "imagemm")
   }
 
 .. code-block:: console
 
   query listAll ($offset:Int $limit:Int) {
-  objectmm (
-    database: "charon"
-    order_by: [
-      {asc: "idObjectMM"}
-    ]
-    offset: $offset
-    limit: $limit
-  ){
-    idObjectMM
-    name
-    startFrame
-    endFrame
-    startTime
-    endTime
-    status
-    origin
-    idDocumentMM
-    idFrameElement
-    idFlickr30k
-    idImageMM
-    idLemma
-    idLU
+    objectmm (
+      database: "charon"
+      order_by: [
+        {asc: "idObjectMM"}
+      ]
+      offset: $offset
+      limit: $limit
+    ){
+      idObjectMM
+      name
+      startFrame
+      endFrame
+      startTime
+      endTime
+      status
+      origin
+      idDocumentMM
+      idFrameElement
+      idFlickr30k
+      idImageMM
+      idLemma
+      idLU
+    }
   }
-  }
-
-
-
 
