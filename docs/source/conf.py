@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'GraphQL/Orkester'
+copyright = '2023, fnzr elymatos'
+author = 'fnzr'
 
 release = '0.1'
 version = '0.1.0'
